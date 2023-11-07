@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ppCornerRadius()
+        userPpImgView()
         //userPpImg.layer.cornerRadius = 35
         if let k = photo {
             userNameLbl.text = k.ownername
@@ -32,8 +32,8 @@ class DetailViewController: UIViewController {
         }
     }
     
-    private func ppCornerRadius() {
-        var height = userPpImg.frame.size.height
+    private func userPpImgView() {
+        let height:CGFloat = userPpImg.frame.size.height
         userPpImg.layer.cornerRadius = height/2
     }
     
