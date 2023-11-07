@@ -28,6 +28,9 @@
 		530F92E22AF30C7200A24652 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F92E12AF30C7200A24652 /* PhotoResponse.swift */; };
 		530F92E42AF30C8100A24652 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F92E32AF30C8100A24652 /* UserModel.swift */; };
 		530F92E72AF30D2000A24652 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 530F92E62AF30D2000A24652 /* Alamofire */; };
+		53173BC82AFA1BC400FF1D7D /* TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53173BC72AFA1BC400FF1D7D /* TableDataSource.swift */; };
+		53173BCA2AFA1C7600FF1D7D /* CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53173BC92AFA1C7600FF1D7D /* CollectionDataSource.swift */; };
+		53173BCE2AFA256200FF1D7D /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53173BCD2AFA256200FF1D7D /* Api.swift */; };
 		5322546B2AF574AF0058FF71 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322546A2AF574AF0058FF71 /* HomeViewModel.swift */; };
 		5322546D2AF5B60E0058FF71 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322546C2AF5B60E0058FF71 /* SearchViewModel.swift */; };
 		532254702AF865420058FF71 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322546F2AF865420058FF71 /* CompositionalLayout.swift */; };
@@ -76,6 +79,9 @@
 		530F92DF2AF30C6900A24652 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		530F92E12AF30C7200A24652 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		530F92E32AF30C8100A24652 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		53173BC72AFA1BC400FF1D7D /* TableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSource.swift; sourceTree = "<group>"; };
+		53173BC92AFA1C7600FF1D7D /* CollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDataSource.swift; sourceTree = "<group>"; };
+		53173BCD2AFA256200FF1D7D /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		5322546A2AF574AF0058FF71 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5322546C2AF5B60E0058FF71 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		5322546F2AF865420058FF71 /* CompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
@@ -136,7 +142,6 @@
 				530F92C72AF2F6BA00A24652 /* Model */,
 				530F92C62AF2F6B100A24652 /* Scene */,
 				530F92CA2AF2F6D900A24652 /* Support */,
-				530F92A12AF2F67B00A24652 /* LaunchScreen.storyboard */,
 				530F92A42AF2F67B00A24652 /* Info.plist */,
 			);
 			path = InstaClone;
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				530F92CB2AF2F70C00A24652 /* NetworkManager.swift */,
+				53173BCD2AFA256200FF1D7D /* Api.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 		530F92CA2AF2F6D900A24652 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				530F92A12AF2F67B00A24652 /* LaunchScreen.storyboard */,
 				530F92962AF2F67900A24652 /* AppDelegate.swift */,
 				530F92982AF2F67900A24652 /* SceneDelegate.swift */,
 				530F929F2AF2F67B00A24652 /* Assets.xcassets */,
@@ -214,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				530F929A2AF2F67900A24652 /* HomeViewController.swift */,
+				53173BC72AFA1BC400FF1D7D /* TableDataSource.swift */,
 				5322546E2AF84BB20058FF71 /* Cell */,
 			);
 			path = HomeVC;
@@ -223,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				530F92CD2AF2F80D00A24652 /* SearchViewController.swift */,
+				53173BC92AFA1C7600FF1D7D /* CollectionDataSource.swift */,
 				532254712AF866730058FF71 /* Cell */,
 			);
 			path = SearchVC;
@@ -395,12 +404,15 @@
 				530F92E02AF30C6900A24652 /* Photos.swift in Sources */,
 				530F92CE2AF2F80D00A24652 /* SearchViewController.swift in Sources */,
 				5322546D2AF5B60E0058FF71 /* SearchViewModel.swift in Sources */,
+				53173BCA2AFA1C7600FF1D7D /* CollectionDataSource.swift in Sources */,
 				532254702AF865420058FF71 /* CompositionalLayout.swift in Sources */,
 				530F92D82AF2FB7F00A24652 /* HomeTableViewCell2.swift in Sources */,
+				53173BC82AFA1BC400FF1D7D /* TableDataSource.swift in Sources */,
 				530F92E22AF30C7200A24652 /* PhotoResponse.swift in Sources */,
 				530F92CC2AF2F70C00A24652 /* NetworkManager.swift in Sources */,
 				530F92DC2AF30C5600A24652 /* SearchModel.swift in Sources */,
 				530F92D52AF2FADB00A24652 /* HomeTableViewCell.swift in Sources */,
+				53173BCE2AFA256200FF1D7D /* Api.swift in Sources */,
 				530F929B2AF2F67900A24652 /* HomeViewController.swift in Sources */,
 				530F92E42AF30C8100A24652 /* UserModel.swift in Sources */,
 				530F92DA2AF306CF00A24652 /* HomeCollectionViewCell.swift in Sources */,

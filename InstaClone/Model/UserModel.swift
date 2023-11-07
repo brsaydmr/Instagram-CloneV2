@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//Giriş sayfası için kullanılacak
 struct UserModel {
     var username:String
     var password:String

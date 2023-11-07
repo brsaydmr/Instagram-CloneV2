@@ -15,6 +15,7 @@ final class HomeViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var viewModel:HomeViewModel = HomeViewModel()
     var isLoading = false
+    var selectedPhoto:Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,9 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupUI()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - UI Setup
@@ -40,6 +44,13 @@ final class HomeViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
+    // MARK: - Prepare
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailViewController {
+            vc.photo = selectedPhoto
+            vc.hidesBottomBarWhenPushed = true
+        }
+    }
     
     // MARK: - Refresh Control
     @objc private func refreshData() {
@@ -54,11 +65,9 @@ final class HomeViewController: UIViewController {
         guard !isLoading else {
             return
         }
-        
         isLoading = true
         viewModel.fetch { [weak self] in
             guard let self = self else { return }
-            
             DispatchQueue.main.async {
                 self.isLoading = false
                 self.tableView.reloadData()
@@ -84,84 +93,6 @@ extension HomeViewController: UIScrollViewDelegate {
         if bottomEdge >= scrollView.contentSize.height {
             fetch()
         }
-    }
-}
-    // MARK: - TableView DataSource
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }else{
-            return viewModel.response?.photos?.photo?.count ?? .zero
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell1", for: indexPath) as! HomeTableViewCell1
-            
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell2", for: indexPath) as! HomeTableViewCell2
-            let responseList = viewModel.response?.photos?.photo?[indexPath.row]
-            
-            cell.userNameLbl.text = responseList?.ownername
-            cell.postTimeLbl.text = "1 saat önce"
-            cell.commentCountLbl.text = responseList?.title
-
-            if let iconServer = responseList?.iconserver {
-                cell.likeCountLbl.text = "\(iconServer) kişi beğendi."
-            } else {
-                cell.likeCountLbl.text = "0 kişi beğendi."
-            }
-            
-            if let userImageURL = responseList?.buddyIconURL {
-                viewModel.fetchImage(from: userImageURL) { imageData in
-                    if let data = imageData {
-                        DispatchQueue.main.async {
-                            cell.MainUserPpImg.image = UIImage(data: data)
-                            cell.userProfilePictureImg.image = UIImage(data: data)
-                        }
-                    }
-                }
-            }
-            
-            if let userPostImageURL = responseList?.urlN {
-                viewModel.fetchImage(from: userPostImageURL) { imageData in
-                    if let data = imageData {
-                        DispatchQueue.main.async {
-                            cell.userPostImg.image = UIImage(data: data)
-                        }
-                    }
-                }
-            }
-            
-            cell.MainUserPpImg.layer.cornerRadius = 24
-            cell.userProfilePictureImg.layer.cornerRadius = 24
-            
-            
-            return cell
-        }
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        if indexPath.section == 0 {
-            return 100
-        }else{
-            return UITableView.automaticDimension
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
     }
 }
 

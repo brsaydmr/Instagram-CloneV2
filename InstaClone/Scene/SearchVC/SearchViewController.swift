@@ -41,8 +41,13 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         
         setupSearchController()
     }
-    
-
+    // MARK: - Prepare
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailViewController {
+            vc.photo = selectedPhoto
+            vc.hidesBottomBarWhenPushed = true
+        }
+    }
     
     // MARK: - SetupSeacrhController
 
@@ -53,9 +58,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         search.searchBar.placeholder = "Type something here to search"
         navigationItem.searchController = search
         
-        
         search.searchBar.becomeFirstResponder()
-
     }
     
     func searchPhotos(with text: String) {
@@ -87,7 +90,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         guard !isLoading else {
             return
         }
-        
         isLoading = true
         viewModel.fetch { [weak self] in
             guard let self = self else { return }
@@ -100,7 +102,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         }
     }
     
-    // MARK: - UIScrollViewDelegate
+    // MARK: - ScrollViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
         if bottomEdge >= scrollView.contentSize.height {
@@ -117,30 +119,4 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         }
     }
 }
-    // MARK: - CollectionDataSource
 
-extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.response?.photos?.photo?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let photoList = viewModel.response?.photos?.photo?[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCollectionViewCell
-        
-        if let userPostImageURL = photoList?.urlN {
-            viewModel.fetchImage(from: userPostImageURL) { imageData in
-                if let data = imageData {
-                    DispatchQueue.main.async {
-                        cell.searchImg.image = UIImage(data: data)
-                    }
-                }
-            }
-        }
-        return cell
-    }
-}

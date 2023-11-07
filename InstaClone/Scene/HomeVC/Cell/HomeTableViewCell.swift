@@ -15,9 +15,7 @@ class HomeTableViewCell1: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setupUI()
-        fetch()
-        
+        setupUI()        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,6 +28,7 @@ class HomeTableViewCell1: UITableViewCell {
     private func setupUI() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        fetch()
     }
 
     

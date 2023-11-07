@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // MARK: - Photo
 struct Photo: Codable {
     let id, owner, secret, server: String?
